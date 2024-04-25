@@ -17,6 +17,8 @@
 #include <string>
 #include <cstdio> // for sscanf because Dr. Oster likes the C way to
                   // get data from strings better than the C++ way
+#include "banker.h" //banker's algorithm data structures and functionality
+
 using namespace std; // if you want to type out "std::" every time, delete this
 
 /*
@@ -77,9 +79,13 @@ int main (int argc, char *argv[]) {
         getline(setup_file, line); // skips the rest of the "processes" line
 
 
+
         // Create the Banker's Algorithm data structures, in any
         // way you like as long as they have the correct size
         // (unfortunately, you might not be able to use sscanf for this...)
+
+        banker* bank = new banker(num_resources, num_processes);
+        bank->infodump();
 
         // 3. Use the rest of the setup file to initialize the data structures
 
