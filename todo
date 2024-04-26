@@ -1,12 +1,16 @@
 to complete:
 -finish banker data structure
--create manual class
+-finish manual class
+-do manual request code
+-do manual release code
 -create auto class
 
 
 to figure out:
 -the structure of the program (classes functions etc)
--where multithreading is involved
+-where to get the max and allocation data into the banker class
+-how the manual mode interacts with the banker class
+-how multithreading is used in this program
 -how to do multithreading
 -how/if semaphores come into play
 

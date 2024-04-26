@@ -18,7 +18,7 @@
 #include <cstdio> // for sscanf because Dr. Oster likes the C way to
                   // get data from strings better than the C++ way
 #include "banker.h" //banker's algorithm data structures and functionality
-// #include "manual.h" //manual mode
+#include "manual.h" //manual mode
 // #include "auto.h" //auto mode
 
 using namespace std; // if you want to type out "std::" every time, delete this
@@ -32,6 +32,7 @@ using namespace std; // if you want to type out "std::" every time, delete this
    they're usually correct!), but systems programmers do it all the
    time, so I'm allowing it here.
 */
+banker* bank;
 
 
 /*
@@ -86,14 +87,14 @@ int main (int argc, char *argv[]) {
         // way you like as long as they have the correct size
         // (unfortunately, you might not be able to use sscanf for this...)
 
-        banker* bank = new banker(num_resources, num_processes);
+        // 3. Use the rest of the setup file to initialize the data structures
+        
+        bank = new banker(num_resources, num_processes);
         bank->infodump();
 
-        // 3. Use the rest of the setup file to initialize the data structures
-
-        delete bank;
         // Done reading the file, so close it
         setup_file.close();
+        delete bank;
     } // end: if setup_file.is_open()
 
     // 4. Check initial conditions to ensure that the system is
@@ -105,6 +106,20 @@ int main (int argc, char *argv[]) {
     // as separate methods within this class, as separate classes
     // with their own main methods, or as additional code within
     // this main method.
+
+    string mode = argv[1];
+    if (mode == "manual") {
+        cout << "Entering manual mode" << endl;
+        manual* man = new manual();
+        man->run();
+    }
+    else if (mode == "auto") {
+        cout << "Auto mode unavailable" << endl;
+        //auto mode
+    }
+    else {
+        cerr << "Unrecognized mode: " << argv[1] << endl;
+    }
     
     return 0; // terminate normally
 }
