@@ -18,6 +18,8 @@
 #include <cstdio> // for sscanf because Dr. Oster likes the C way to
                   // get data from strings better than the C++ way
 #include "banker.h" //banker's algorithm data structures and functionality
+// #include "manual.h" //manual mode
+// #include "auto.h" //auto mode
 
 using namespace std; // if you want to type out "std::" every time, delete this
 
@@ -89,7 +91,7 @@ int main (int argc, char *argv[]) {
 
         // 3. Use the rest of the setup file to initialize the data structures
 
-
+        delete bank;
         // Done reading the file, so close it
         setup_file.close();
     } // end: if setup_file.is_open()
