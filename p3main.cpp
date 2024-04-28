@@ -81,7 +81,7 @@ int main (int argc, char *argv[]) {
         
         getline(setup_file, line); // skips the rest of the "processes" line
 
-
+        
 
         // Create the Banker's Algorithm data structures, in any
         // way you like as long as they have the correct size
@@ -91,10 +91,10 @@ int main (int argc, char *argv[]) {
         
         bank = new banker(num_resources, num_processes);
         bank->infodump();
+        bank->processFile(setup_file);
 
         // Done reading the file, so close it
         setup_file.close();
-        delete bank;
     } // end: if setup_file.is_open()
 
     // 4. Check initial conditions to ensure that the system is
@@ -120,6 +120,7 @@ int main (int argc, char *argv[]) {
     else {
         cerr << "Unrecognized mode: " << argv[1] << endl;
     }
-    
+
+    delete bank;
     return 0; // terminate normally
 }

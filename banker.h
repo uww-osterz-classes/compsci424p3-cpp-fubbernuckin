@@ -2,6 +2,8 @@
 #define BANKER
 #include <iostream>
 #include <vector> //basically for debugging
+#include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -31,6 +33,50 @@ public:
                 cout << max[i][j] << endl;
             }
         }
+    }
+
+    bool processFile(ifstream& file) { //return false if issue with data
+        //read in data
+        //read available section
+        string line;
+        getline(file, line); //discard the "available" line
+        for (int i = 0; i < m; ++i) {
+            file >> available[i];
+        }
+        getline(file, line); //discard the new line after available section
+
+        //read max section
+        getline(file, line);
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) {
+                file >> max[i][j];
+            }
+        }
+        getline(file, line); //discard the new line after max section
+
+        //read allocation section
+        getline(file, line); 
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; ++j) {
+                file >> allocation[i][j];
+            }
+        }
+
+        //checking initial conditions
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (allocation[n][m] > max[n][m]) {
+                    cerr << "Allocated more resources than stated maximum";
+                    return false;
+                }
+            }
+        }
+        bool safe = safetyCheck();
+        return safe; //all good
+    }
+
+    bool safetyCheck() {
+        //check if system is in a safe state
     }
 };
 
