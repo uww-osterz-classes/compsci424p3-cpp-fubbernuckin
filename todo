@@ -8,7 +8,6 @@ to complete:
 
 to figure out:
 -the structure of the program (classes functions etc)
--where to get the max and allocation data into the banker class
 -how the manual mode interacts with the banker class
 -how multithreading is used in this program
 -how to do multithreading
@@ -17,3 +16,4 @@ to figure out:
 figured out:
 -multithreading happens in automatic mode
 -manual mode allows user to request or release any resources from any process
+-where to get the max and allocation data into the banker class

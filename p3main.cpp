@@ -81,8 +81,6 @@ int main (int argc, char *argv[]) {
         
         getline(setup_file, line); // skips the rest of the "processes" line
 
-        
-
         // Create the Banker's Algorithm data structures, in any
         // way you like as long as they have the correct size
         // (unfortunately, you might not be able to use sscanf for this...)
@@ -91,10 +89,13 @@ int main (int argc, char *argv[]) {
         
         bank = new banker(num_resources, num_processes);
         bank->infodump();
-        bank->processFile(setup_file);
+        bool processed = bank->processFile(setup_file);
 
         // Done reading the file, so close it
         setup_file.close();
+        if (!processed) {
+            return 0;
+        }
     } // end: if setup_file.is_open()
 
     // 4. Check initial conditions to ensure that the system is
