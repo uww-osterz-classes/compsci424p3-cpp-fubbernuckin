@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 
+#include "banker.h"
+
 using namespace std;
 
 class manual
@@ -15,7 +17,7 @@ public:
     manual(/* args */);
     ~manual();
 
-    void run() {
+    void run(banker* bank) {
         while (true) { //menu loop
             vector<string> tokens;
             cout << "Enter a command" << endl;
@@ -45,9 +47,14 @@ public:
             }
             else if (tokens[0] == "request") {
                 // request
+                bank->addRequest(stoi(tokens[5]), stoi(tokens[3]), stoi(tokens[1]));
             }
             else if (tokens[0] == "release") {
+                bank->releaseRequest(stoi(tokens[5]), stoi(tokens[3]), stoi(tokens[1]));
                 // release
+            }
+            else if (tokens[0] == "infodump") {
+                bank->infodump();
             }
             else {
                 cerr << "Unknown command: " << tokens[0] << endl;

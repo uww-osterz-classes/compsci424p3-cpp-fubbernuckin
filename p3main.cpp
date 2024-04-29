@@ -65,6 +65,7 @@ int main (int argc, char *argv[]) {
     string line;
     int num_resources;
     int num_processes;
+    bool processed;
 
     setup_file.open(argv[2], ios::in);
     if (setup_file.is_open()) {
@@ -88,19 +89,18 @@ int main (int argc, char *argv[]) {
         // 3. Use the rest of the setup file to initialize the data structures
         
         bank = new banker(num_resources, num_processes);
-        bank->infodump();
-        bool processed = bank->processFile(setup_file);
-
+        
+        processed = bank->processFile(setup_file);
         // Done reading the file, so close it
         setup_file.close();
-        if (!processed) {
-            return 0;
-        }
     } // end: if setup_file.is_open()
 
     // 4. Check initial conditions to ensure that the system is
     // beginning in a safe state: see "Check initial conditions"
     // in the Program 3 instructions
+    if (!processed) {
+        return 0;
+    }
 
     // 5. Go into either manual or automatic mode, depending on
     // the value of args[0]; you could implement these two modes
@@ -112,7 +112,7 @@ int main (int argc, char *argv[]) {
     if (mode == "manual") {
         cout << "Entering manual mode" << endl;
         manual* man = new manual();
-        man->run();
+        man->run(bank);
     }
     else if (mode == "auto") {
         cout << "Auto mode unavailable" << endl;

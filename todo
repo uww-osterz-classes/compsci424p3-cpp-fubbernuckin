@@ -1,6 +1,6 @@
 to complete:
--finish banker functions
--finish manual class
+-finish banker request function
+-finish banker release function
 -do manual request code
 -do manual release code
 -create auto class
