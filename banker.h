@@ -14,7 +14,8 @@ private:
     int** max;//maximum claims by each process (n)
              //for each resource (m)
     int** allocation; //how many instances of a resource are allocated to each process
-    int** request; //request[i][j] records number of resources R_j that process p_i is requesting
+    //int** request; //request[i][j] records number of resources R_j that process p_i is requesting
+    //attempted to implement with one request at a time
 
     int** need; //how many potential request edges each process could ask for
     int* work; //in-process simulation of available resources
@@ -166,11 +167,15 @@ public:
         allocation[process][resource] += amount;
         available[resource] -= amount;
         if(!checkSafety()) { //if request is unsafe
-            cout << "Resource request denied." << endl;
+            cout << "Resource request denied. (unsafe)" << endl;
             granted = false;
         }
-        else if (amount > available[resource]) { //checks for over-allocation of resource
-            cout << "Resource request denied." << endl;
+        else if (available[resource] < 0) { //checks for over-allocation of resource
+            cout << "Resource request denied. (request exceeds resources)" << endl;
+            granted = false;
+        }
+        else if (allocation[process][resource] > max[process][resource]) {
+            cout << "Resource request denied. (request exceeds claims)" << endl;
             granted = false;
         }
         else {
