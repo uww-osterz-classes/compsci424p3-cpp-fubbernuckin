@@ -11,10 +11,9 @@ using namespace std;
 class manual
 {
 private:
-    /* data */
 
 public:
-    manual(/* args */);
+    manual();
     ~manual();
 
     void run(banker* bank) {
@@ -63,14 +62,12 @@ public:
     }
 };
 
-manual::manual(/* args */)
+manual::manual()
 {
 }
 
 manual::~manual()
 {
 }
-
-
 
 #endif

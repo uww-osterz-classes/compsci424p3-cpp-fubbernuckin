@@ -19,6 +19,7 @@
                   // get data from strings better than the C++ way
 #include "banker.h" //banker's algorithm data structures and functionality
 #include "manual.h" //manual mode
+#include "automatic.h" //auto mode
 // #include "auto.h" //auto mode
 
 using namespace std; // if you want to type out "std::" every time, delete this
@@ -115,8 +116,9 @@ int main (int argc, char *argv[]) {
         man->run(bank);
     }
     else if (mode == "auto") {
-        cout << "Auto mode unavailable" << endl;
-        //auto mode
+        cout << "Entering auto mode" << endl;
+        automatic* au = new automatic();
+        au->run(bank, num_processes, num_resources, 3);
     }
     else {
         cerr << "Unrecognized mode: " << argv[1] << endl;

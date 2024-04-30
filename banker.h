@@ -200,6 +200,7 @@ public:
     }
     
     bool releaseRequest(int process, int resource, int amount) {
+        cout << "Process " << process << " is releasing " << amount << " units of resource " << resource << endl;
         if (amount <= 0) {
             cout << "Must release greater than zero units of a resource." << endl;
             return false;
@@ -233,11 +234,6 @@ banker::banker(int num_resources, int num_processes) {
         allocation[i] = new int[m];
     }
 
-    request = new int*[n];
-    for (int i = 0; i < n; i++) {
-        request[i] = new int[m];
-    }
-
     need = new int*[n];
     for (int i = 0; i < n; i++) {
         need[i] = new int[m];
@@ -258,11 +254,6 @@ banker::~banker() {
         delete[] allocation[i];
     }
     delete[] allocation;
-
-    for (int i = 0; i < n; i++) {
-        delete[] request[i];
-    }
-    delete[] request;
 
     for (int i = 0; i < n; i++) {
         delete[] need[i];
